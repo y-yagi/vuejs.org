@@ -165,10 +165,10 @@
 <p>Vue.js を使っているときに、あなた自身で DOM に触れることはカスタムディレクティブ(後述)を除いてほとんどありません。 View の更新はデータが変わったときに自動的に行われます。これらの View の更新は、textNode に至る精度を持った高い粒度で行われます。 これらは高性能化のために、バッチ化されて非同期実行されています。</p>
 <h3 id="Model">Model</h3><p>若干修正されたプレーンな JavaScript オブジェクト。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$data <span class="comment">// The Model</span></span><br></pre></td></tr></table></figure>
-<p>Vue.js において、Model は単純にプレーンな JavaScript オブジェクトか<strong>データオブジェクト</strong>です。それらのプロパティと、それらが変更されるかを観察している Vue インスタンスを操作できます。Vue.js はデータオブジェクトのプロパティを ES5 getter/setters に変換することによって、透明性のある反応を実現します。 ダーティーチェックは必要ありませんし、View を更新するために、明示的なシグナルを Vue に送る必要もありません。 データが変更されたときはいつでも、次のフレームで View は更新されます。</p>
-<p>Vue インスタンスは、それらが観察しているデータオブジェクトの全てのプロパティをプロキシしています。 そのため、一度オブジェクト <code>{ a: 1 }</code> が観察されれば、 <code>vm.$data.a</code> と<code>vm.a</code> の両方が同じ値を返します。また、<code>vm.a = 2</code> に設定すると <code>vm.$data</code> が変わります.</p>
-<p>データオブジェクトは適当な位置で変化します。そのため、参照によってそれらを変更することは、<code>vm.$data</code> を変更することと同じ効果を持っています. この事が、複数の Vue インスタンスがデータの同じ部分を観察することを可能にしています。より広い応用としては、 Vue インスタンスは純粋な view として使われ、そして、より分離したストアレイヤにデータ操作ロジックを外面化します。</p>
-<p>ここでの問題は、一度観察が始まったら、Vue.js はプロパティの新規追加と削除を検出できないことです。<br>この問題を避けるために、観察されたオブジェクトは <code>$add</code> 、<code>$set</code> そして <code>$delete</code> メソッドで追加削除されます。</p>
+<p>Vue.js において、Model は単純にプレーンな JavaScript オブジェクトか<strong>データオブジェクト</strong>です。それらのプロパティと、それらが変更されるかを監視している Vue インスタンスを操作できます。Vue.js はデータオブジェクトのプロパティを ES5 getter/setters に変換することによって、透明性のある反応を実現します。 ダーティーチェックは必要ありませんし、View を更新するために、明示的なシグナルを Vue に送る必要もありません。 データが変更されたときはいつでも、次のフレームで View は更新されます。</p>
+<p>Vue インスタンスは、それらが監視しているデータオブジェクトの全てのプロパティをプロキシしています。 そのため、一度オブジェクト <code>{ a: 1 }</code> が監視されれば、 <code>vm.$data.a</code> と<code>vm.a</code> の両方が同じ値を返します。また、<code>vm.a = 2</code> に設定すると <code>vm.$data</code> が変わります.</p>
+<p>データオブジェクトは適当な位置で変化します。そのため、参照によってそれらを変更することは、<code>vm.$data</code> を変更することと同じ効果を持っています. この事が、複数の Vue インスタンスがデータの同じ部分を監視することを可能にしています。より広い応用としては、 Vue インスタンスは純粋な view として使われ、そして、より分離したストアレイヤにデータ操作ロジックを外面化します。</p>
+<p>ここでの問題は、一度監視が始まったら、Vue.js はプロパティの新規追加と削除を検出できないことです。<br>この問題を避けるために、監視されたオブジェクトは <code>$add</code> 、<code>$set</code> そして <code>$delete</code> メソッドで追加削除されます。</p>
 <h3 id="ディレクティブ">ディレクティブ</h3><p>Vue.js が DOM 要素についての何かをすることを伝えているプレフィックスのついた HTML 属性。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>ここでは div 要素は値が <code>message</code> でディレクティブ <code>v-text</code> を持っています。 これは Vue.js が、div の textContent が Vue インスタンスの <code>message</code> プロパティと同期していることを、保っていることを伝えています。</p>

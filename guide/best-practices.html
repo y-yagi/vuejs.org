@@ -157,14 +157,14 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">''</span>,</span><br><span class="line">    validation: &#123;</span><br><span class="line">      valid: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>その理由は、 Vue は再帰的にデータオブジェクトを歩き見まわることによってデータ変更を監視していることと、<code>Object.defineProperty</code> を使用して既存のプロパティをリアクティブな getter と setter に変換するからです。インスタンスが作成される時にプロパティが存在しない場合、 Vue はそれを追跡することができません。</p>
 <p>しかし、データ内のすべての単一のネストされたプロパティを設定する必要はありません。空オブジェクトとしてフィールドを初期化することは OK で、そして、それ以降のネストされた構造を持つ新しいオブジェクトに設定し、Vue はこの新しいオブジェクトのネストされたプロパティを歩き、それらを監視することができるようになるためだからです。</p>
-<h2 id="プロパティの追加と削除">プロパティの追加と削除</h2><p>上述したように、Vue は <code>Object.defineProperty</code> でプロパティを変換してデータを監視します。しかしながら、ECMAScript 5 では、新しいプロパティがオブジェクトに追加された時、またはオブジェクトからプロパティが削除された時、それらを検出する方法はありません。この制約に対処するために、オブジェクトは3つの方法で拡張されて監視されます:</p>
+<h2 id="プロパティの追加と削除">プロパティの追加と削除</h2><p>上述したように、Vue は <code>Object.defineProperty</code> でプロパティを変換してデータを監視します。しかしながら、ECMAScript 5 では、新しいプロパティがオブジェクトに追加された時、またはオブジェクトからプロパティが削除された時、それらを検出する方法はありません。この制約に対処するために、オブジェクトは3つのメソッドが拡張されて監視されます:</p>
 <ul>
 <li><code>obj.$add(key, value)</code></li>
 <li><code>obj.$set(key, value)</code></li>
 <li><code>obj.$delete(key)</code></li>
 </ul>
-<p>これらの方法は、望まれた DOM 更新をトリガしながら、監視されたオブジェクトからプロパティを追加/削除するために使用できます。<code>$add</code> と <code>$set</code> の差異は、<code>$add</code> はもしキーが既にオブジェクトに存在する場合は早期に返すので、そういうわけでまさに <code>obj.$add(key)</code> を呼び出すことは <code>undefined</code> で既にある値を上書きしません。</p>
-<p>関連注意事項は、インデックス(例えば <code>arr[1] = value</code>)を設定することによって、直接バウンドされたデータ配列を変更しますが、Vue は変更をピックアップできません。また、これらの変更について Vue.js に通知するために 拡張メソッドを使用できます。監視された配列は2つの方法で拡張されています:</p>
+<p>これらのメソッドは、望まれた DOM 更新をトリガしながら、監視されたオブジェクトからプロパティを追加/削除するために使用できます。<code>$add</code> と <code>$set</code> の差異は、<code>$add</code> はもしキーが既にオブジェクトに存在する場合は早期に返すので、そういうわけでまさに <code>obj.$add(key)</code> を呼び出すことは <code>undefined</code> で既にある値を上書きしません。</p>
+<p>関連注意事項は、インデックス(例えば <code>arr[1] = value</code>)を設定することによって、直接バウンドされたデータ配列を変更しますが、Vue は変更をピックアップできません。また、これらの変更について Vue.js に通知するために 拡張メソッドを使用できます。監視された配列は2つのメソッドで拡張されています:</p>
 <ul>
 <li><code>arr.$set(index, value)</code></li>
 <li><code>arr.$remove(index | value)</code></li>
