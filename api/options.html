@@ -71,19 +71,33 @@
         
         <ul class="menu-root">
             
-                <li><a href="/api/index.html" class="sidebar-link">概要</a></li>
+                <li>
+                    <a href="/api/index.html" class="sidebar-link">概要</a>
+                </li>
             
-                <li><a href="/api/options.html" class="sidebar-link current">コンポーネントオプション</a></li>
+                <li>
+                    <a href="/api/options.html" class="sidebar-link current">コンポーネントオプション</a>
+                </li>
             
-                <li><a href="/api/instance-properties.html" class="sidebar-link">インスタンスプロパティ</a></li>
+                <li>
+                    <a href="/api/instance-properties.html" class="sidebar-link">インスタンスプロパティ</a>
+                </li>
             
-                <li><a href="/api/instance-methods.html" class="sidebar-link">インスタンスメソッド</a></li>
+                <li>
+                    <a href="/api/instance-methods.html" class="sidebar-link">インスタンスメソッド</a>
+                </li>
             
-                <li><a href="/api/global-api.html" class="sidebar-link">グローバル API</a></li>
+                <li>
+                    <a href="/api/global-api.html" class="sidebar-link">グローバル API</a>
+                </li>
             
-                <li><a href="/api/directives.html" class="sidebar-link">ディレクティブ</a></li>
+                <li>
+                    <a href="/api/directives.html" class="sidebar-link">ディレクティブ</a>
+                </li>
             
-                <li><a href="/api/filters.html" class="sidebar-link">フィルタ</a></li>
+                <li>
+                    <a href="/api/filters.html" class="sidebar-link">フィルタ</a>
+                </li>
             
             <li><a href="http://legacy.vuejs.org">0.11 のドキュメントをお探しですか？</a></li>
             <li style="margin:10px 0 3px">
@@ -138,6 +152,9 @@
 <li><a href="/guide/components.html#Props_のバインディングタイプ">Props のバインディングタイプ</a></li>
 <li><a href="/guide/components.html#Props_としてのコールバックの伝達">Props としてのコールバックの伝達</a></li>
 </ul>
+<p>文字列として定義している props の代わりに、検証要件を含んだオブジェクトを使用できます:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'prop-validation-demo'</span>, &#123;</span><br><span class="line">  props: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'size'</span>,</span><br><span class="line">      type: <span class="built_in">Number</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'message'</span>,</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      required: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>prop 検証の詳細については <a href="/guide/components.html#Prop_検証">Prop 検証</a> を参照してください。</p>
 <h4 id="ハイフンでつながれた引数についての注意">ハイフンでつながれた引数についての注意</h4><p>HTML の引数名は、小文字や大文字の違いを無視するので、通常はキャメルケースの代わりにハイフンでつながれた引数を使用します。ハイフンを含んだ属性をもつ <code>props</code> を使用する特殊な場合もあります:</p>
 <ol>
 <li><p>もし引数が data 引数出会った場合、<code>data-</code> 接頭辞は自動的に削除されます。</p>
