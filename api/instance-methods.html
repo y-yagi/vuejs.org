@@ -99,6 +99,10 @@
                     <a href="/api/filters.html" class="sidebar-link">フィルタ</a>
                 </li>
             
+                <li>
+                    <a href="/api/elements.html" class="sidebar-link new">特別な要素</a>
+                </li>
+            
             <li><a href="http://legacy.vuejs.org">0.11 のドキュメントをお探しですか？</a></li>
             <li style="margin:10px 0 3px">
               <script data-gittip-username="yyx990803"
@@ -228,7 +232,8 @@
 <h2 id="ライフサイクル">ライフサイクル</h2><h3 id="vm-$mount(_[element|selector]_)">vm.$mount( [element|selector] )</h3><ul>
 <li><strong>element</strong> <code>HTMLElement</code> | <strong>selector</strong> <code>String</code> <em>任意</em></li>
 </ul>
-<p>もしインスタンス化の際に、Vue インスタンスが <code>el</code> オプションを受け取らなかった場合、マニュアルで <code>$mount()</code> を呼んで、ある要素をそこに割り当て、コンパイルを開始することができます。もし引数が何も与えられなかったら、空の <code>&lt;div&gt;</code> が自動的に作られます。既に使用可能になった状態のインスタンスで <code>$mount()</code> を呼んでも、何も起きません。このメソッドはインスタンスそのものを返しますので、他のインスタンスメソッドをその後につなげることができます。</p>
+<p>もしインスタンス化の際に、Vue インスタンスが <code>el</code> オプションを受け取らなかった場合、マニュアルで <code>$mount(el)</code> を呼んでコンパイルフェーズを開始することができます。デフォルトでは、マウントされた要素はインスタンスのテンプレートで置き換えられます。<code>replace</code> オプションが <code>false</code> に設定される時、テンプレートはテンプレートに <code>&lt;content&gt;</code> アウトレットを含んでいるのに限らず、マウントされた要素に挿入、そして任意の存在する内部のコンテンツを置き換えます。</p>
+<p>もし引数が何も与えられなかったら、テンプレートはドキュメント外の要素として作成されます。そしてあなた自身によってそれをドキュメントに挿入するために他の DOM インスタンスメソッドを使用しなければなりません。もし、<code>replace</code> オプションが <code>false</code> に設定される場合は、wrapper 要素として空の <code>&lt;div&gt;</code> が自動的に作られます。既に使用可能になった状態のインスタンスで <code>$mount()</code> を呼んでも、何も起きません。このメソッドはインスタンスそのものを返しますので、他のインスタンスメソッドをその後につなげることができます。</p>
 <h3 id="vm-$destroy(_[remove]_)">vm.$destroy( [remove] )</h3><ul>
 <li><strong>remove</strong> <code>Boolean</code> <em>任意</em></li>
 </ul>
