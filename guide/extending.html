@@ -164,9 +164,10 @@
 <h3 id="プラグインの使用">プラグインの使用</h3><p>CommonJS ベースのビルドを行っていると仮定します。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vueTouch = <span class="built_in">require</span>(<span class="string">'vue-touch'</span>)</span><br><span class="line"><span class="comment">// プラグインをグルーバルで使用</span></span><br><span class="line">Vue.use(vueTouch)</span><br></pre></td></tr></table></figure>
 <p>プラグインには、オプションを追加することができます。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(<span class="string">'my-plugin'</span>, &#123;</span><br><span class="line">  <span class="comment">/* 追加オプションを渡します */</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="他の拡張ツール">他の拡張ツール</h2><ul>
-<li><a href="https://github.com/vuejs/vue-resource" target="_blank" rel="external">vue-resource</a>: XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグイン。</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(<span class="built_in">require</span>(<span class="string">'my-plugin'</span>), &#123;</span><br><span class="line">  <span class="comment">/* 追加オプションを渡します */</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="現在提供済みのプラグインとツール">現在提供済みのプラグインとツール</h2><ul>
+<li><a href="https://github.com/vuejs/vue-resource" target="_blank" rel="external">vue-resource</a>: XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグインです。</li>
+<li><a href="https://github.com/vuejs/vue-validator" target="_blank" rel="external">vue-validator</a>: フォーム検証するためのプラグインです。</li>
 <li><a href="https://github.com/vuejs/vue-devtools" target="_blank" rel="external">vue-devtools</a>: Vue.js アプリケーションのデバッグ用 Chrome devtools extension です。</li>
 <li><a href="https://github.com/vuejs/vue-touch" target="_blank" rel="external">vue-touch</a>: Hammer.js を利用して、タッチ操作のディレクティブを追加できます。</li>
 <li><a href="https://github.com/vuejs/vue-element" target="_blank" rel="external">vue-element</a>: Vue.js でカスタムエレメントを登録することができます。</li>
