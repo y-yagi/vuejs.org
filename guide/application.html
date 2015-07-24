@@ -155,9 +155,9 @@
 <h2 id="モジュール化">モジュール化</h2><p>スタンドアロンで動作する Vue.js コードは、グローバルで使用できますが煩雑になりやすいので、モジュールのビルドツールを利用して、コードをより良く整理していくことが望ましいです。実践への導入としては、CommonJS モジュールにコード（Node.js、および Vue.js のソースコードで使用されているフォーマット）を記述して、<a href="http://webpack.github.io/" target="_blank" rel="external">Webpack</a> や <a href="http://browserify.org/" target="_blank" rel="external">Browserify</a> でバンドルする方法をおすすめします。</p>
 <p>Webpack と Browserify は単にモジュールバンドラ以上のものです。それら両方は、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、<a href="https://github.com/babel/babel-loader" target="_blank" rel="external">babel-loader</a> または <a href="https://github.com/babel/babelify" target="_blank" rel="external">babelify</a> を使用して、将来サポートされる ES6/7 シンタックスでコードを書くことができます。</p>
 <h2 id="単一ファイルコンポーネント">単一ファイルコンポーネント</h2><p>Vue.js を利用した典型的なプロジェクトでは、たくさんの個別のコンポーネントにコードを分割して、コンポーネントごとに HTML/CSS/JavaScript(Vue.js) を配置しておくと便利です。上述したように、Webpack または Browserify を使用するとき、次のようなコンポーネントを適切なソース変換できます:</p>
-<p><img src="/images/vueify.png"></p>
+<p><img src="/images/vue-component.png"></p>
 <p>もし、プリプロセッサに詳しいなら、次のようにも書くことができます：</p>
-<p><img src="/images/vueify_with_pre.png"></p>
+<p><img src="/images/vue-component-with-pre-processors.png"></p>
 <p>これらの単一ファイル Vue コンポーネントを Webpack + <a href="https://github.com/vuejs/vue-loader" target="_blank" rel="external">vue-loader</a> または Browserify + <a href="https://github.com/vuejs/vueify" target="_blank" rel="external">vueify</a> でビルドできます。もしプリプロセッサを使用している場合、Webpack ローダ API はより良いファイル依存関係追跡とキャッシングが可能であるため、Webpack をセットアップして使用することをお勧めします。</p>
 <p>GitHub のビルドセットアップの例を探すことができます。</p>
 <ul>

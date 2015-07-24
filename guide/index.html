@@ -157,22 +157,22 @@
 <p>Vue.js の API は <a href="http://angularjs.org" target="_blank" rel="external">AngularJS</a>、<a href="http://knockoutjs.com" target="_blank" rel="external">KnockoutJS</a>、<a href="http://ractivejs.org" target="_blank" rel="external">Ractive.js</a>、 <a href="http://www.rivetsjs.com" target="_blank" rel="external">Rivets.js</a>に強く影響を受けています。それらと似てはいますが、単純さと機能性のちょうど良いスィートスポットを見つけることによって、Vue.js はそれらのライブラリに対して価値ある代変手段になりうると私は信じています。</p>
 <p>その他のライブラリの表現に既に慣れているかもしれませんが、それらの表現の記法が Vue.js のコンテキストにおいて意味するところとは違っているかもしれませんので、以下に示すコンセプトの全体像に目を通してみてください。</p>
 <h2 id="コンセプト概要">コンセプト概要</h2><p><img src="/images/mvvm.png" alt="MVVM"></p>
-<h3 id="ViewModel">ViewModel</h3><p>Model と View を同期するオブジェクト。 Vue.js において, 全ての Vue インスタンスは ViewModel です。 それらは <code>Vue</code> コンストラクタかそのサブクラスでインスタンス化されます:</p>
+<h3 id="ViewModel">ViewModel</h3><p>Model と View を同期するオブジェクトです。 Vue.js において, 全ての Vue インスタンスは ViewModel です。 それらは <code>Vue</code> コンストラクタかそのサブクラスでインスタンス化されます:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123; <span class="comment">/* options */</span> &#125;)</span><br></pre></td></tr></table></figure>
 <p>これは Vue.js をつかって開発するときに初めて出会うオブジェクトです。詳細は <a href="/api/">Vue コンストラクタ</a> を参照してください。</p>
-<h3 id="View">View</h3><p>Vue インスタンスによって管理される実際の DOM 。</p>
+<h3 id="View">View</h3><p>Vue インスタンスによって管理される実際の DOM です。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$el <span class="comment">// The View</span></span><br></pre></td></tr></table></figure>
 <p>Vue.js は DOM ベースのテンプレーティングを使います。各々の Vue インスタンスは対応する DOM 要素と関連づいています。Vue インスタンスが作られると、必要なデータバインディングを設定している間、Vue インスタンスはその親要素の全ての子ノードを再帰的に巡回します。</p>
 <p>Vue.js を使っているときに、あなた自身で DOM に触れることはカスタムディレクティブ(後述)を除いてほとんどありません。 View の更新はデータが変わったときに自動的に行われます。これらの View の更新は、textNode に至る精度を持った高い粒度で行われます。 これらは高性能化のために、バッチ化されて非同期実行されています。</p>
-<h3 id="Model">Model</h3><p>若干修正されたプレーンな JavaScript オブジェクト。</p>
+<h3 id="Model">Model</h3><p>若干修正されたプレーンな JavaScript オブジェクトです。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$data <span class="comment">// The Model</span></span><br></pre></td></tr></table></figure>
 <p>Vue.js において、Model は単純にプレーンな JavaScript オブジェクトか<strong>データオブジェクト</strong>です。一度、オブジェクトが Vue インスタンス内部でデータとして利用されると、それは<strong>リアクティブ</strong>になります。それらのプロパティと、それらが変更されるかを監視している Vue インスタンスを操作できます。Vue.js はデータオブジェクトのプロパティを ES5 getter/setters に変換することによって、透明性のある反応を実現します。 ダーティーチェックは必要ありませんし、View を更新するために、明示的なシグナルを Vue に送る必要もありません。 データが変更されたときはいつでも、次のフレームで View は更新されます。</p>
 <p>Vue インスタンスは、それらが監視しているデータオブジェクトの全てのプロパティをプロキシしています。 そのため、一度オブジェクト <code>{ a: 1 }</code> が監視されれば、 <code>vm.$data.a</code> と<code>vm.a</code> の両方が同じ値を返します。また、<code>vm.a = 2</code> に設定すると <code>vm.$data</code> が変わります.</p>
 <p>データオブジェクトは適当な位置で変化します。そのため、参照によってそれらを変更することは、<code>vm.$data</code> を変更することと同じ効果を持っています. この事が、複数の Vue インスタンスがデータの同じ部分を監視することを可能にしています。より広い応用としては、 Vue インスタンスは純粋な view として使われ、そして、より分離したストアレイヤにデータ操作ロジックを外面化します。</p>
 <p>ここでの問題は、一度監視が始まったら、Vue.js はプロパティの新規追加と削除を検出できないことです。<br>この問題を避けるために、監視されたオブジェクトは <code>$add</code> 、<code>$set</code> そして <code>$delete</code> メソッドで追加削除されます。</p>
-<p>以下は Vue.js でどのようのにリアクティブな更新が実装されているか、高レベルな概要です:</p>
+<p>以下は Vue.js でどのようにリアクティブな更新が実装されているか、高レベルな概要です:</p>
 <p><img src="/images/data.png" alt="データ監視"></p>
-<h3 id="ディレクティブ">ディレクティブ</h3><p>Vue.js が DOM 要素についての何かをすることを伝えているプレフィックスのついた HTML 属性。</p>
+<h3 id="ディレクティブ">ディレクティブ</h3><p>Vue.js が DOM 要素についての何かをすることを伝えているプレフィックスのついた HTML 属性です。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>ここでは div 要素は値が <code>message</code> でディレクティブ <code>v-text</code> を持っています。 これは Vue.js が、div の textContent が Vue インスタンスの <code>message</code> プロパティと同期していることを、保っていることを伝えています。</p>
 <p>ディレクティブは任意の DOM 操作をカプセル化できます。例えば、<code>v-attr</code> は要素の属性を操作し、<code>v-repeat</code> は配列に基づいて要素をクローンし、 <code>v-on</code> はイベントリスナを随行します。これらは後にまとめます。</p>
@@ -220,7 +220,7 @@ var demo = new Vue({
 
 <p><a href="http://jsfiddle.net/yyx990803/yMv7y/" target="_blank" rel="external">jsfiddle</a>も利用できます.</p>
 <p>todo をクリックして toggle したり、 ブラウザのコンソールを開いて <code>demo</code> オブジェクトで遊んでみることも可能です。例えば、<code>demo.title</code> を変更して、<code>demo.todos</code> に新しいオブジェクトを追加したり、 todo の<code>done</code> 状態をトグルしてみたりしてみて下さい。</p>
-<p>多分、いくつかの疑問が心に浮かんできたでしょう。– しかし心配ありません。我々はそれらの疑問をすぐに解決します。</p>
+<p>多分、いくつかの疑問が心に浮かんできたでしょう。しかし心配ありません。我々はそれらの疑問をすぐに解決します。</p>
 <p>次の<a href="/guide/directives.html">ディレクティブ</a>に進みましょう。</p>
 
     <div class="footer">間違いを見つけた、またはドキュメントに貢献したいですか？<a href="https://github.com/vuejs-jp/vuejs.org" target="_blank">Github からこのサイトを Fork しましょう</a>！</div>
