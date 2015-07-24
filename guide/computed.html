@@ -157,6 +157,7 @@
 <p>getter のみしか必要がない場合は、オブジェクトの代わりに関数を一つ渡すこともできます:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">computed: &#123;</span><br><span class="line">  fullName: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName </span><br><span class="line">  &#125;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
 <p>要するに computed property は getter/setter 関数を定義したプロパティです。あたかも通常のプロパティとして使用することができますが、実際にアクセスした時は getter 関数によって値が返されます。また、値を変更した時は、その新しい値を引数として setter 関数をトリガします。</p>
+<p>0.12.8 より前は、computed properties は getter のように振舞います。- それにアクセスするたびに、getter 関数は再評価されます。0.12.8 ではこれは改善されました。- computed properties はキャッシュされ、必要なときにだけ、lazily に再評価されます。</p>
 <p class="tip">Vue.js 0.11 以前では、条件付きのステートメントが呼び出される際に、ユーザーが明示的に依存性を列挙する必要性がありました。0.11 以降ではその必要はありません。</p>
 
 <p>次: <a href="/guide/custom-directive.html">カスタムディレクティブ</a></p>
