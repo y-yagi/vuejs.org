@@ -37,7 +37,7 @@
     <ul id="nav">
         <li>
   <form id="search-form">
-    <input type="text" id="search-query">
+    <input type="text" id="search-query" class="st-default-search-input">
   </form>
 </li>
 <li><a href="/guide/" class="nav-link current">ガイド</a></li>
@@ -55,7 +55,7 @@
     <ul class="main-menu">
         <li>
   <form id="search-form">
-    <input type="text" id="search-query">
+    <input type="text" id="search-query" class="st-default-search-input">
   </form>
 </li>
 <li><a href="/guide/" class="nav-link current">ガイド</a></li>
@@ -292,8 +292,8 @@ var parent2 = new Vue({
 })
 </script>
 
-<h3 id="識別子によるコンポーネントの繰り返し">識別子によるコンポーネントの繰り返し</h3><p>識別子シンタックスはコンポーネントを使用しているときも動作し、繰り返されるデータは、キーとして識別子を使用するコンポーネントのプロパティとして設定されます:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"list-example"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- データは `this.user` として内部コンポーネントで利用できます --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">user-profile</span> <span class="attribute">v-repeat</span>=<span class="value">"user:users"</span>&gt;</span><span class="tag">&lt;/<span class="title">user-profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="エイリアスによるコンポーネントの反復処理">エイリアスによるコンポーネントの反復処理</h3><p>エイリアスシンタックスはコンポーネントを使用しているときも動作し、繰り返されるデータは、キーとしてエイリアスを使用するコンポーネントのプロパティとして設定されます:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"list-example"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- データは `this.user` として内部コンポーネントで利用できます --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">user-profile</span> <span class="attribute">v-repeat</span>=<span class="value">"user in users"</span>&gt;</span><span class="tag">&lt;/<span class="title">user-profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p class="tip"><code>v-repeat</code> で一度コンポーネントを利用すると、同じスコーピングルールは、コンポーネントコンテナ要素上の他のディレクティブに適用されることに注意してください。結果として、親テンプレートの <code>$index</code> にアクセスすることはできません。コンポーネントの独自テンプレート内部だけで利用できるようになります。<br><br>別な方法としては、中間スコープを作るために <code>&lt;template&gt;</code> ブロックを繰り返し使用することができますが、ほとんどの場合は、コンポーネント内部の <code>$index</code> を使用することをお勧めします。</p>
 
 <h2 id="子の参照">子の参照</h2><p>時々、JavaScript でネストした子コンポーネントへのアクセスが必要になる場合があります。それを実現するためには <code>v-ref</code> を用いて子コンポーネントに対して参照 ID を割り当てる必要があります。例えば:</p>
